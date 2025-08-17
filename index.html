@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>เว็บไซต์คำนวณค่า pH และ pOH</title>
+  <style>
+    body {
+      font-family: "Prompt", sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #4a90e2;
+      color: white;
+      padding: 20px;
+    }
+    nav {
+      margin: 20px 0;
+    }
+    nav button {
+      margin: 5px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #4a90e2;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    nav button:hover {
+      background: #357abd;
+    }
+    section {
+      display: none;
+      margin: 20px auto;
+      max-width: 400px;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    input {
+      padding: 8px;
+      margin: 10px 0;
+      width: 80%;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button.calc {
+      background: #50c878;
+      margin-top: 10px;
+    }
+    button.calc:hover {
+      background: #3da766;
+    }
+    p.result {
+      font-weight: bold;
+      font-size: 18px;
+      color: #333;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>เว็บไซต์คำนวณค่า pH และ pOH</h1>
+    <p>เลือกการคำนวณที่ต้องการ</p>
+  </header>
+
+  <nav>
+    <button onclick="showSection('ph')">คำนวณค่า pH</button>
+    <button onclick="showSection('poh')">คำนวณค่า pOH</button>
+  </nav>
+
+  <!-- ส่วนคำนวณ pH -->
+  <section id="ph">
+    <h2>คำนวณค่า pH</h2>
+    <label>กรอกค่า [H⁺] (mol/L):</label><br>
+    <input type="number" id="hValue" step="any" placeholder="เช่น 1e-3"><br>
+    <button class="calc" onclick="calculatePH()">คำนวณ</button>
+    <p id="phResult" class="result"></p>
+  </section>
+
+  <!-- ส่วนคำนวณ pOH -->
+  <section id="poh">
+    <h2>คำนวณค่า pOH</h2>
+    <label>กรอกค่า [OH⁻] (mol/L):</label><br>
+    <input type="number" id="ohValue" step="any" placeholder="เช่น 1e-4"><br>
+    <button class="calc" onclick="calculatePOH()">คำนวณ</button>
+    <p id="pohResult" class="result"></p>
+  </section>
+
+  <script>
+    // แสดงเฉพาะ section ที่เลือก
+    function showSection(section) {
+      document.getElementById("ph").style.display = "none";
+      document.getElementById("poh").style.display = "none";
+      document.getElementById(section).style.display = "block";
+    }
+
+    // ฟังก์ชันคำนวณ pH
+    function calculatePH() {
+      let h = parseFloat(document.getElementById("hValue").value);
+      if (h > 0) {
+        let ph = -Math.log10(h);
+        document.getElementById("phResult").innerText = "ค่า pH = " + ph.toFixed(2);
+      } else {
+        alert("กรุณากรอกค่าที่ถูกต้อง");
+      }
+    }
+
+    // ฟังก์ชันคำนวณ pOH
+    function calculatePOH() {
+      let oh = parseFloat(document.getElementById("ohValue").value);
+      if (oh > 0) {
+        let poh = -Math.log10(oh);
+        document.getElementById("pohResult").innerText = "ค่า pOH = " + poh.toFixed(2);
+      } else {
+        alert("กรุณากรอกค่าที่ถูกต้อง");
+      }
+    }
+  </script>
+</body>
+</html>
